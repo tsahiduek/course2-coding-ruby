@@ -1,0 +1,92 @@
+# ------ Assignment 1 solution ------
+require 'open3'
+
+desc 'Checks for cpu load in last 5 minuts and notifies if above threshold'
+task :check_load do
+  threshold = ENV["THRESHOLD"] || 2.0
+
+  stdout = Open3.capture3("uptime").first
+
+  # It is also possible to use regular expression here (but a bit less readable). See Regexp Ruby class
+  short, mid, long = stdout.split("load averages:").last.split(" ")
+
+  puts "Current midterm load is #{mid}"
+
+  if mid.to_f > threshold.to_f
+    raise "Error! Cpu load in last 5 minutes is above the threshold of #{threshold}!"
+  end
+end
+
+# Calling "rake check_load THRESHOLD=2.4" when the actual load is 2.7 will produce:
+
+# Current midterm load is 2.7
+# rake aborted!
+# Error! Cpu load in last 5 minutes is above the threshold of 2.4!
+# /Users/eyals/dev/coding-ruby/Rakefile:68:in `block in <top (required)>'
+# Tasks: TOP => check_load
+# (See full trace by running task with --trace)
+
+# -----------------------------------
+
+
+
+# ------ Assignment 2 solution ------
+# I skipped adding description to all tasks to make it shorter
+# There are advanced ways we can extract more duplicate code here, but, I kept it simplified.
+task pizza_and_potatoes: [:pizza, :potatoes]
+
+task pizza: [:create_dough, :add_tomato_sauce, :add_cheese, :place_pizza_in_oven]
+
+task potatoes: [:peel_potatoes, :put_spices, :place_potatoes_in_oven]
+
+task :market do
+  puts "Go to the market"
+end
+
+task :turn_oven_on do
+  puts "Turn oven on"
+end
+
+task create_dough: [:market] do
+  puts "Creating dough"
+end
+
+task :add_tomato_sauce do
+  puts "putting tomato sauce"
+end
+
+task :add_cheese do
+  puts "Adding cheese"
+end
+
+task place_pizza_in_oven: [:turn_oven_on] do
+  puts "Pizza placed in oven"
+end
+
+task peel_potatoes: [:turn_oven_on] do
+  puts "Peel potatoes"
+end
+
+task :put_spices do
+  puts "put spices"
+end
+
+task place_potatoes_in_oven: [:turn_oven_on] do
+  puts "Potatoes placed in oven"
+end
+
+
+# calling "rake pizza_and_potatoes" will produce the following output:
+
+# Go to the market
+# Creating dough
+# putting tomato sauce
+# Adding cheese
+# Turn oven on
+# Pizza placed in oven
+# Peel potatoes
+# put spices
+# Potatoes placed in oven
+
+
+# -----------------------------------
