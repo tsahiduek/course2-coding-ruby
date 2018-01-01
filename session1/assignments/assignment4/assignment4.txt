@@ -20,6 +20,7 @@ Code submbmittion:
 1. Be placed in "Solutions" folder at "session1/solutions/".
 2. Please submit the code in a single "Rakefile"
 3. Code should Create a Pull request (Go to Moodle for guidlines for forking the project + creating a pull. Found under "coding" section)
+4. When you finish creating the pull request - Add a comment and mention my Github username (@eyalstoler) that you are ready for a review.
 
 
 Feel free to send questions to eyal.stoler@kenshoo.com
