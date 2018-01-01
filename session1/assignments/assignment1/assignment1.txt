@@ -1,0 +1,25 @@
+Write a rake task called "archive". the task will perform the following:
+
+- Archive all files in a specified path (default path is "." ) to "tar.gz".
+- The new archive name should be the "folder_name.tar.gz" (change all spcaes,hyphens and other non word characters to "_")
+- The location of the "folder_name.tar.gz" file will be located at "<the folder path>/build/folder_name.tar.gz"
+- Task should receive two parameters:
+  1. A parameter called PATH - this parameter should tell rake where to perform the above actions (default ".").
+  2. A parameter called EXCLUDE - This is a comman seprated list of sffixes that the task should ignore and NOT archive.
+  
+  
+An example:
+
+Calling the command "rake archive PATH=/home/user/my_archive EXCLUDE=.tmp,.bkp" will perform the following:
+
+1. Create a file "/home/user/my_archive/build/my_archive.tar.gz
+2. File will not include all files that end with .tmp & .bkp.
+
+Code submbmittion:
+
+1. Be placed in "Solutions" folder.
+2. Please submit the code in a single "Rakefile"
+3. Code should Create a Pull request (Go to Moodle for guidlines for forking the project + creating a pull. Found under "coding" section)
+
+
+Feel free to send questions to eyal.stoler@kenshoo.com
