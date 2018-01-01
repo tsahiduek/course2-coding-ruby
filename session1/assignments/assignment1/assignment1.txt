@@ -17,7 +17,7 @@ Calling the command "rake archive PATH=/home/user/my_archive EXCLUDE=.tmp,.bkp" 
 
 Code submbmittion:
 
-1. Be placed in "Solutions" folder.
+1. Be placed in "Solutions" folder at "session1/solutions/".
 2. Please submit the code in a single "Rakefile"
 3. Code should Create a Pull request (Go to Moodle for guidlines for forking the project + creating a pull. Found under "coding" section)
 
