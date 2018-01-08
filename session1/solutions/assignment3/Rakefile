@@ -1,0 +1,12 @@
+require 'fileutils'
+
+namespace :files do
+  desc "rename .yaml to .yml"
+  task :rename_yml, [:FILENAME,:PATH] do |t,args|
+    if args.FILENAME != nil
+      path = args.PATH || Dir.pwd
+      f = path + "/" + args.FILENAME
+      (File.file?(f)) && (FileUtils.mv f, "#{File.dirname(f)}/#{File.basename(f,'.*')}.yml")
+    end
+  end
+end
