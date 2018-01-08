@@ -17,28 +17,17 @@ task :archive,[:PATH,:EXCLUDE]  do |t,args|
   Dir.mkdir(dir) unless File.exists?(dir)
   #set up archive name
   archive_name = Pathname.new(path).basename.to_s.gsub(/[^a-z,A-Z]/, '_') + ".tar.gz"
-    # puts "path=#{path}"
-    # puts "dir=#{dir}"
-    puts "archive_name= #{dir}#{archive_name}"
 
-  # puts "path=#{path} and archive_name=#{archive_name}"
   #create exlckude list
   exclude_arr = exclude.split(",")
-  # archive_name = File.dirname(filename)
-  # archive_name = "temp_file_name"
   File.open(dir + archive_name.to_s, "wb") do |archive|
     Zlib::GzipWriter.wrap(archive) do |gz|
       Gem::Package::TarWriter.new(gz) do |tar|
         Dir.glob("#{path}/**") do |fn|
-          puts "File.directory?(fn) = #{File.directory?(fn)} for #{fn}"
           ext = File.extname(fn)
-          puts "next? #{exclude_arr.include?(ext) || File.directory?(fn)}"
-          next if exclude_arr.include?(ext) || File.directory?(fn) #|| ext == "." || ext == ".."
-
+          next if exclude_arr.include?(ext) || File.directory?(fn) 
           tmp_file = File.open(fn)
           content = File.read(fn)
-
-          puts "fn = #{fn}"
           tar.add_file_simple(Pathname.new(tmp_file).basename.to_s,0644,content.length) do |io|
             io.write(content)
           end
